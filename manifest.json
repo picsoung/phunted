@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "PHunted",
+  "description":"Find which product have been hunted, and hunt new ones.",
+  "version": "0.4",
+  "icons": {
+    "16": "shared/img/phunted16.png",
+    "48": "shared/img/phunted48.png",
+    "128": "shared/img/phunted128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "shared/img/phunted19.png",
+      "38": "shared/img/phunted38.png"
+    },
+    "default_title": "Been hunted?",
+    "default_popup": "browser_action/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+        "*://*.producthunt.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.producthunt.com/tech/new*"
+      ],
+      "js": ["shared/js/jquery-2.1.4.min.js","shared/js/keen.min.js","content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["shared/js/jquery-2.1.4.min.js","shared/js/keen.min.js","shared/js/URI.js","background/current-tab.js"]
+  },
+  "web_accessible_resources": [
+    "shared/img/*",
+    "shared/fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.keen.io; object-src 'self'"
+}
